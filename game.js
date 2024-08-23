@@ -41,10 +41,26 @@ const Gameboard = (() => {
     const checkDraw = () => {
         return board.every(row => row.every(cell => cell !== null)) && !checkWin();
     };
+    const getBoard = () => {
+        board.map(row => [...row])
+    };
+
+    return {initialize, makeMove, checkWin, checkDraw};
 })();
 
 const Player = (name, symbol) => {
-    return {name, symbol};
+    let score = 0
+    const getName = () => name;
+    const getSymbol = () => symbol;
+    const getScore = () => score;
+    const incrementScore = () => {
+        score++;
+    };
+    const makeMove = (gameboard, row, col) => {
+        return gameboard.makeMove(row, col, symbol);
+    };
+
+    return {getName, getSymbol, getScore, incrementScore, makeMove};
 };
 
 const GameController = (() => {
